@@ -31,7 +31,11 @@ public class MainActivity extends AppCompatActivity {
         String date_Hours = new SimpleDateFormat("H", Locale.getDefault()).format(new Date());
         String date_Mins = new SimpleDateFormat("mm", Locale.getDefault()).format(new Date());
 
-
+        if(date_Hours.length()==1)
+            date_Hours="0"+date_Hours;
+        if(date_Mins.length()==1)
+            date_Mins="0"+date_Hours;
+        TextView tvMessage  = (TextView) findViewById(R.id.tvMessage);
 
         TextView tvHeure  = (TextView) findViewById(R.id.tvHeure);
         TextView tvH  = (TextView) findViewById(R.id.tvH);
@@ -44,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         ImageView MMoins  = (ImageView) findViewById(R.id.MMoins);
 
         Button btValider = (Button) findViewById(R.id.btValider);
-
-
+        TextView tvMessageZouple = (TextView) findViewById(R.id.tvMessageZouple);
+        tvMessageZouple.setText("Oh non si tu mets un réveil ca va me reveiller viens on n'en met pas");
 
         myHandler = new Handler();
         myHandler.postDelayed(myRunnable,5000); // on redemande toute les 500ms
@@ -54,18 +58,48 @@ public class MainActivity extends AppCompatActivity {
         tvMin.setText(date_Mins);
 
 
+        String finalDate_Hours = date_Hours;
+        String finalDate_Hours1 = date_Hours;
+        String finalDate_Mins = date_Mins;
         HPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Integer.parseInt(tvHeure.getText().toString())<24)
+                if(Integer.parseInt(tvHeure.getText().toString())<23)
                 {
                    int newH= Integer.parseInt(String.valueOf(tvHeure.getText().toString()));
                    newH++;
+
                     tvHeure.setText(String.valueOf(newH));
+                    if(tvHeure.length()==1)
+                        tvHeure.setText("0"+tvHeure.getText());
+
                 }
 
                 else
-                    tvHeure.setText("0");
+                    tvHeure.setText("00");
+                //if(tvHeure.getText()== finalDate_Hours &&tvMin.getText()== finalDate_Mins)
+                  //  tvMessageZouple.setText("Etranzrzazihazihaizhioazhio a l'heure de maintenant  ");
+                if(Integer.parseInt(String.valueOf(tvHeure.getText()))==0 &&Integer.parseInt(String.valueOf(tvMin.getText()))==0)
+                    tvMessageZouple.setText("T'es un rigolo toi a mettre un réveil a minuit ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>0 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=3||Integer.parseInt(String.valueOf(tvHeure.getText()))==0 && Integer.parseInt(String.valueOf(tvMin.getText()))>0)
+                  tvMessageZouple.setText("PARDON !!!! MAIS C'EST SUPER TOT !! ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>3 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=6)
+                    tvMessageZouple.setText("Encore un réveil qui va piquer ! ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>6 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=9)
+                    tvMessageZouple.setText("C'est tot mais on ferra avec ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>9 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=12)
+                    tvMessageZouple.setText("Enfin un réveil de qualité avec un peu de sommeil");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>12 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=14)
+                    tvMessageZouple.setText("C'est l'heure de bouffer pas de dormir");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>14 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=16)
+                    tvMessageZouple.setText("La petite sieste de l'aprem ?");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>16 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=18)
+                    tvMessageZouple.setText("T'as pas honte de mettre un reveil a cette heure la ?");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>18 && Integer.parseInt(String.valueOf(tvHeure.getText()))<24)
+                    tvMessageZouple.setText("Je crois que tu n'as pas compris le concept d'un réveil");
+                if(Integer.parseInt(String.valueOf(tvMin.getText()))==05)
+                    tvMessageZouple.setText(tvMessageZouple.getText()+"Les 5mins servent tellement a rien");
+
             }
         });
 
@@ -77,10 +111,33 @@ public class MainActivity extends AppCompatActivity {
                     int newH= Integer.parseInt(String.valueOf(tvHeure.getText().toString()));
                     newH--;
                     tvHeure.setText(String.valueOf(newH));
+                    if(tvHeure.length()==1)
+                        tvHeure.setText("0"+tvHeure.getText());
                 }
 
                 else
-                    tvHeure.setText("24");
+                    tvHeure.setText("23");
+
+                if(Integer.parseInt(String.valueOf(tvHeure.getText()))==0 &&Integer.parseInt(String.valueOf(tvMin.getText()))==0)
+                    tvMessageZouple.setText("T'es un rigolo toi a mettre un réveil a minuit ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>0 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=3||Integer.parseInt(String.valueOf(tvHeure.getText()))==0 && Integer.parseInt(String.valueOf(tvMin.getText()))>0)
+                    tvMessageZouple.setText("PARDON !!!! MAIS C'EST SUPER TOT !! ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>3 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=6)
+                    tvMessageZouple.setText("Encore un réveil qui va piquer ! ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>6 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=9)
+                    tvMessageZouple.setText("C'est tot mais on ferra avec ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>9 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=12)
+                    tvMessageZouple.setText("Enfin un réveil de qualité avec un peu de sommeil");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>12 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=14)
+                    tvMessageZouple.setText("C'est l'heure de bouffer pas de dormir");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>14 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=16)
+                    tvMessageZouple.setText("La petite sieste de l'aprem ?");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>16 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=18)
+                    tvMessageZouple.setText("T'as pas honte de mettre un reveil a cette heure la ?");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>18 && Integer.parseInt(String.valueOf(tvHeure.getText()))<24)
+                    tvMessageZouple.setText("Je crois que tu n'as pas compris le concept d'un réveil");
+                if(Integer.parseInt(String.valueOf(tvMin.getText()))==05)
+                    tvMessageZouple.setText(tvMessageZouple.getText()+"Les 5mins servent tellement a rien");
             }
         });
 
@@ -88,15 +145,42 @@ public class MainActivity extends AppCompatActivity {
         MPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Integer.parseInt(tvMin.getText().toString())<60)
+                if(Integer.parseInt(tvMin.getText().toString())<59)
                 {
                     int newMin= Integer.parseInt(String.valueOf(tvMin.getText().toString()));
                     newMin++;
                     tvMin.setText(String.valueOf(newMin));
+                    if(tvMin.length()==1)
+                        tvMin.setText("0"+tvMin.getText());
                 }
 
-                else
-                    tvMin.setText("0");
+                else {
+                    if(Integer.parseInt(tvHeure.getText().toString())==23)
+                        tvHeure.setText("00");
+                    tvMin.setText("00");
+
+                }
+
+                if(Integer.parseInt(String.valueOf(tvHeure.getText()))==0 &&Integer.parseInt(String.valueOf(tvMin.getText()))==0)
+                    tvMessageZouple.setText("T'es un rigolo toi a mettre un réveil a minuit ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>0 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=3||Integer.parseInt(String.valueOf(tvHeure.getText()))==0 && Integer.parseInt(String.valueOf(tvMin.getText()))>0)
+                    tvMessageZouple.setText("PARDON !!!! MAIS C'EST SUPER TOT !! ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>3 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=6)
+                    tvMessageZouple.setText("Encore un réveil qui va piquer ! ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>6 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=9)
+                    tvMessageZouple.setText("C'est tot mais on ferra avec ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>9 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=12)
+                    tvMessageZouple.setText("Enfin un réveil de qualité avec un peu de sommeil");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>12 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=14)
+                    tvMessageZouple.setText("C'est l'heure de bouffer pas de dormir");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>14 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=16)
+                    tvMessageZouple.setText("La petite sieste de l'aprem ?");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>16 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=18)
+                    tvMessageZouple.setText("T'as pas honte de mettre un reveil a cette heure la ?");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>18 && Integer.parseInt(String.valueOf(tvHeure.getText()))<24)
+                    tvMessageZouple.setText("Je crois que tu n'as pas compris le concept d'un réveil");
+                if(Integer.parseInt(String.valueOf(tvMin.getText()))==05)
+                    tvMessageZouple.setText(tvMessageZouple.getText()+"Les 5mins servent tellement a rien");
             }
         });
         MMoins.setOnClickListener(new View.OnClickListener() {
@@ -107,11 +191,35 @@ public class MainActivity extends AppCompatActivity {
                     int newMin= Integer.parseInt(String.valueOf(tvMin.getText().toString()));
                     newMin--;
                     tvMin.setText(String.valueOf(newMin));
+                    if(tvMin.length()==1)
+                        tvMin.setText("0"+tvMin.getText());
+
 
                 }
 
                 else
-                    tvMin.setText("60");
+                    tvMin.setText("59");
+
+                if(Integer.parseInt(String.valueOf(tvHeure.getText()))==0 &&Integer.parseInt(String.valueOf(tvMin.getText()))==0)
+                    tvMessageZouple.setText("T'es un rigolo toi a mettre un réveil a minuit ! ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>0 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=3||Integer.parseInt(String.valueOf(tvHeure.getText()))==0 && Integer.parseInt(String.valueOf(tvMin.getText()))>0)
+                    tvMessageZouple.setText("PARDON !!!! MAIS C'EST SUPER TOT !! ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>3 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=6)
+                    tvMessageZouple.setText("Encore un réveil qui va piquer ! ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>6 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=9)
+                    tvMessageZouple.setText("C'est tot mais on ferra avec ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>9 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=12)
+                    tvMessageZouple.setText("Enfin un réveil de qualité avec un peu de sommeil ! ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>12 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=14)
+                    tvMessageZouple.setText("C'est l'heure de bouffer pas de dormir ! ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>14 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=16)
+                    tvMessageZouple.setText("La petite sieste de l'aprem ? ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>16 && Integer.parseInt(String.valueOf(tvHeure.getText()))<=18)
+                    tvMessageZouple.setText("T'as pas honte de mettre un reveil a cette heure la ? ");
+                else if(Integer.parseInt(String.valueOf(tvHeure.getText()))>18 && Integer.parseInt(String.valueOf(tvHeure.getText()))<24)
+                    tvMessageZouple.setText("Je crois que tu n'as pas compris le concept d'un réveil ! ");
+                if(Integer.parseInt(String.valueOf(tvMin.getText()))==05)
+                    tvMessageZouple.setText(tvMessageZouple.getText()+"Les 5mins servent tellement a rien !");
             }
         });
         btValider.setOnClickListener(new View.OnClickListener() {
@@ -120,7 +228,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(AlarmClock.ACTION_SET_ALARM);
                 intent.putExtra(AlarmClock.EXTRA_HOUR,Integer.parseInt(tvHeure.getText().toString()));
                 intent.putExtra(AlarmClock.EXTRA_MINUTES,Integer.parseInt(tvMin.getText().toString()));
-                intent.putExtra(AlarmClock.EXTRA_MESSAGE,"Reveille toi !!!!!");
+                intent.putExtra(AlarmClock.EXTRA_MESSAGE,tvMessage.getText().toString());
+                intent.putExtra(AlarmClock.EXTRA_ALARM_SNOOZE_DURATION,2);
 
                 startActivity(intent);
             }
@@ -164,4 +273,5 @@ public class MainActivity extends AppCompatActivity {
         if(myHandler != null)
             myHandler.removeCallbacks(myRunnable); // On arrete le callback
     }
+
 }
